@@ -14,7 +14,36 @@ class MyHomePage extends StatelessWidget {
       children: [
         locationWidget(),
         Text('ikonlar olacak'),
-
+        SizedBox(
+          height: 100.h,
+        ),
+        Container(
+          height: 335.sp,
+          width: 353.sp,
+          decoration: BoxDecoration(
+            border:
+                Border.all(color: Colors.grey.withOpacity(0.7), width: 2.sp),
+            borderRadius: BorderRadius.circular(16.sp),
+            gradient: LinearGradient(
+              colors: [
+                Colors.white.withOpacity(0.3),
+                Colors.white.withOpacity(0.3)
+              ],
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text('Bugün,17 Temmuz',style: TextStyles.generalWhiteTextStyle1(fontSize: 18.sp),),
+                Text(
+                  '29 ',
+                  style: TextStyles.generalWhiteTextStyle2(),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
