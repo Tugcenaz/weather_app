@@ -9,20 +9,13 @@ class SearchPage extends StatelessWidget {
   Widget _buildBody() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 70.0.sp, horizontal: 30.sp),
-      child: Container(
-        decoration: BoxDecoration(
-            //  color: Colors.white,
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(30.sp),
-                bottomLeft: Radius.circular(30.sp))),
-        child: TextFormField(
-          decoration: InputDecoration(
-              fillColor: Colors.white,
-              filled: true,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.sp),
-                  borderSide: BorderSide.none)),
-        ),
+      child: TextFormField(
+        decoration: InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15.sp),
+                borderSide: BorderSide.none)),
       ),
     );
   }
