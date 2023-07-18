@@ -8,6 +8,7 @@ import 'package:weather_app/app/components/wind_and_hum_widget.dart';
 import 'package:weather_app/app/controller/weather_controller.dart';
 import 'package:weather_app/core/constants/icon_constants.dart';
 import 'package:weather_app/core/styles/text_styles.dart';
+import 'package:weather_app/core/time_convert.dart';
 import '../../components/page_background_widget.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -16,10 +17,10 @@ class MyHomePage extends StatelessWidget {
 
   currentWeather() async {
     await weatherController.getCurrentWeather(cityName: 'Bursa');
+    return true;
   }
 
   Widget _buildBody() {
-    currentWeather();
     return Column(
       children: [
         locationWidget(),
@@ -55,7 +56,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'tarih gelecek',
+              dateToStringTime((weatherController.currentWeatherModel.current?.lastUpdatedEpoch??0)*1000),
               style: TextStyles.generalWhiteTextStyle1(fontSize: 18.sp),
             ),
             Text(
@@ -76,12 +77,15 @@ class MyHomePage extends StatelessWidget {
                 title: 'Rüzgar',
                 weatherState:
                     weatherController.currentWeatherModel.current?.windKph),
-            SizedBox(height: 10.sp,),
+            SizedBox(
+              height: 10.sp,
+            ),
             WindAndHumWidget(
                 icon: IconConstants.hum_icon,
                 title: 'Nem',
-                weatherState:
-                    weatherController.currentWeatherModel.current?.humidity?.toDouble()),
+                weatherState: weatherController
+                    .currentWeatherModel.current?.humidity
+                    ?.toDouble()),
           ],
         ),
       ),
@@ -133,7 +137,15 @@ class MyHomePage extends StatelessWidget {
       body: Stack(
         children: [
           pageBackGroundWidget(),
-          _buildBody(),
+          FutureBuilder(
+              future: currentWeather(),
+              builder: (_, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  return _buildBody();
+                } else {
+                  return CircularProgressIndicator();
+                }
+              })
         ],
       ),
     );
