@@ -10,14 +10,14 @@ class ApiClientController {
     //her istekte query içinde istenen parametreler
     Map<String, dynamic> queryParams = {
       'key': dotenv.env['API_KEY'],
-      'lang':'tr'
+      'lang':'tr' //verileri türkçe olarak almak için
     };
     //extra parametre istendiyse eklendi
     if (extraParams != null) {
       queryParams.addAll(extraParams);
     }
     try {
-      var result = await dio.get(apiPath, queryParameters: queryParams);
+      var result = await dio.get(apiPath,queryParameters: queryParams);
       return result.data;
     } catch (e) {
       Get.log("CLIENT GET ERROR: $e");
