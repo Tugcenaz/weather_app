@@ -1,20 +1,25 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:weather_app/app/controller/weather_controller.dart';
 import 'package:weather_app/core/constants/icon_constants.dart';
 import 'package:weather_app/core/styles/text_styles.dart';
 import '../../components/page_background_widget.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
+  WeatherController weatherController = Get.find();
 
   Widget _buildBody() {
     return Column(
       children: [
         locationWidget(),
-        Text('ikonlar olacak Dinamikleştir'),
-        SizedBox(
+        CachedNetworkImage(
+            imageUrl: 'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),
+                SizedBox(
           height: 100.h,
         ),
         currentWeatherWidget(),
@@ -24,35 +29,34 @@ class MyHomePage extends StatelessWidget {
 
   Container currentWeatherWidget() {
     return Container(
-        height: 335.sp,
-        width: 353.sp,
-        decoration: BoxDecoration(
-          border:
-              Border.all(color: Colors.grey.withOpacity(0.7), width: 2.sp),
-          borderRadius: BorderRadius.circular(16.sp),
-          gradient: LinearGradient(
-            colors: [
-              Colors.white.withOpacity(0.3),
-              Colors.white.withOpacity(0.3)
-            ],
-          ),
+      height: 335.sp,
+      width: 353.sp,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withOpacity(0.7), width: 2.sp),
+        borderRadius: BorderRadius.circular(16.sp),
+        gradient: LinearGradient(
+          colors: [
+            Colors.white.withOpacity(0.3),
+            Colors.white.withOpacity(0.3)
+          ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text(
-                'Bugün,17 Temmuz Dinamikleştir',
-                style: TextStyles.generalWhiteTextStyle1(fontSize: 18.sp),
-              ),
-              Text(
-                '29 Dinamikleştir',
-                style: TextStyles.generalWhiteTextStyle2(),
-              ),
-            ],
-          ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text(
+              'Bugün,17 Temmuz ',
+              style: TextStyles.generalWhiteTextStyle1(fontSize: 18.sp),
+            ),
+            Text(
+              '${weatherController.currentWeatherModel.current?.tempC}',
+              style: TextStyles.generalWhiteTextStyle2(),
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 
   Widget locationWidget() {
@@ -93,6 +97,15 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   }
+
+  /*future() async {
+    WeatherController weatherController = Get.find();
+    var result = await weatherController.getCurrentWeather(cityName: 'Bursa');
+    if (result != null) {
+      weatherController.currentWeatherModel = result;
+      return weatherController.currentWeatherModel;
+    }
+  }*/
 
   @override
   Widget build(BuildContext context) {
