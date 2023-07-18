@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:weather_app/app/components/weather_icon_widget.dart';
 import 'package:weather_app/app/controller/weather_controller.dart';
 import 'package:weather_app/core/constants/icon_constants.dart';
 import 'package:weather_app/core/styles/text_styles.dart';
@@ -13,13 +13,22 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
   WeatherController weatherController = Get.find();
 
+  currentWeather() async {
+    await weatherController.getCurrentWeather(cityName: 'Bursa');
+
+  }
+
   Widget _buildBody() {
+    currentWeather();
     return Column(
       children: [
         locationWidget(),
-        CachedNetworkImage(
-            imageUrl: 'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),
-                SizedBox(
+        Obx(
+          () => weatherIconWidget(
+              imageUrl:
+                  'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),
+        ),
+        SizedBox(
           height: 100.h,
         ),
         currentWeatherWidget(),
@@ -97,15 +106,6 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   }
-
-  /*future() async {
-    WeatherController weatherController = Get.find();
-    var result = await weatherController.getCurrentWeather(cityName: 'Bursa');
-    if (result != null) {
-      weatherController.currentWeatherModel = result;
-      return weatherController.currentWeatherModel;
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
