@@ -6,10 +6,10 @@ class TextStyles {
   static TextStyle generalWhiteTextStyle1(
       {Color? color, FontWeight? fontWeight, double? fontSize}) {
     return GoogleFonts.overpass(
-        shadows: [const Shadow(blurRadius: 25, offset: Offset(1, 10))],
+        shadows: [const Shadow(blurRadius: 8, offset: Offset(1, 10))],
         fontSize: fontSize ?? 24.sp,
         color: color ?? Colors.white,
-        fontWeight: fontWeight ?? FontWeight.w600,
+        fontWeight: fontWeight ?? FontWeight.w700,
         height: 1.3,
         letterSpacing: 1.1);
   }
@@ -17,11 +17,21 @@ class TextStyles {
   static TextStyle generalWhiteTextStyle2(
       {Color? color, FontWeight? fontWeight, double? fontSize}) {
     return GoogleFonts.overpass(
-        shadows: [const Shadow(blurRadius: 70, offset: Offset(20, 16))],
-        fontSize: fontSize ?? 100.sp,
+        shadows: [const Shadow(blurRadius: 90, offset: Offset(0, 6))],
+        fontSize: fontSize ?? 86.sp,
         color: color ?? Colors.white,
-        fontWeight: fontWeight ?? FontWeight.w600,
+        fontWeight: fontWeight ?? FontWeight.w500,
         height: 1.3,
         letterSpacing: 1.1);
+  }
+
+  static TextStyle generalWhiteTextStyle3(
+      {Color? color, FontWeight? fontWeight, double? fontSize}) {
+    return GoogleFonts.overpass(
+        fontSize: fontSize ?? 20.sp,
+        color: color ?? Colors.white,
+        fontWeight: fontWeight ?? FontWeight.w400,
+        height: 1.3,
+        letterSpacing: 1);
   }
 }

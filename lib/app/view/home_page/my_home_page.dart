@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/app/components/weather_icon_widget.dart';
+import 'package:weather_app/app/components/wind_and_hum_widget.dart';
 import 'package:weather_app/app/controller/weather_controller.dart';
 import 'package:weather_app/core/constants/icon_constants.dart';
 import 'package:weather_app/core/styles/text_styles.dart';
@@ -15,7 +16,6 @@ class MyHomePage extends StatelessWidget {
 
   currentWeather() async {
     await weatherController.getCurrentWeather(cityName: 'Bursa');
-
   }
 
   Widget _buildBody() {
@@ -41,12 +41,12 @@ class MyHomePage extends StatelessWidget {
       height: 335.sp,
       width: 353.sp,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.withOpacity(0.7), width: 2.sp),
+        border: Border.all(color: Colors.white.withOpacity(0.7), width: 2.sp),
         borderRadius: BorderRadius.circular(16.sp),
         gradient: LinearGradient(
           colors: [
-            Colors.white.withOpacity(0.3),
-            Colors.white.withOpacity(0.3)
+            Colors.white.withOpacity(0.5),
+            Colors.white.withOpacity(0.4)
           ],
         ),
       ),
@@ -55,13 +55,33 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Bugün,17 Temmuz ',
+              'tarih gelecek',
               style: TextStyles.generalWhiteTextStyle1(fontSize: 18.sp),
             ),
             Text(
-              '${weatherController.currentWeatherModel.current?.tempC}',
+              '${weatherController.currentWeatherModel.current?.tempC?.toStringAsFixed(0)}°',
               style: TextStyles.generalWhiteTextStyle2(),
+              textAlign: TextAlign.center,
             ),
+            Text(
+              '${weatherController.currentWeatherModel.current?.condition?.text}',
+              style: TextStyles.generalWhiteTextStyle1(),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 10.sp,
+            ),
+            WindAndHumWidget(
+                icon: IconConstants.windy_icon,
+                title: 'Rüzgar',
+                weatherState:
+                    weatherController.currentWeatherModel.current?.windKph),
+            SizedBox(height: 10.sp,),
+            WindAndHumWidget(
+                icon: IconConstants.hum_icon,
+                title: 'Nem',
+                weatherState:
+                    weatherController.currentWeatherModel.current?.humidity?.toDouble()),
           ],
         ),
       ),
