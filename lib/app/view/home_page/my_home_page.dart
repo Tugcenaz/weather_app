@@ -3,6 +3,7 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:simple_animations/animation_builder/mirror_animation_builder.dart';
 import 'package:weather_app/app/view/search_page.dart';
 import 'package:weather_app/app/components/weather_icon_widget.dart';
 import 'package:weather_app/app/components/wind_and_hum_widget.dart';
@@ -29,9 +30,16 @@ class MyHomePage extends StatelessWidget {
       children: [
         locationWidget(),
         Obx(
-          () => weatherIconWidget(
-              imageUrl:
-                  'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),
+          () => MirrorAnimationBuilder(
+            builder: (BuildContext context, value, Widget? child) {
+              return Transform.scale(scale: value.toDouble(), child: child);
+            },
+            tween: Tween(begin: 1, end: 0.8),
+            duration: const Duration(seconds: 4),
+            child: weatherIconWidget(
+                imageUrl:
+                    'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),
+          ),
         ),
         SizedBox(
           height: 100.h,
@@ -110,7 +118,8 @@ class MyHomePage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0.sp),
               ),
-              isScrollControlled: true,useSafeArea: true,
+              isScrollControlled: true,
+              useSafeArea: true,
               context: Get.context!,
               builder: (BuildContext context) {
                 return SearchPage();
