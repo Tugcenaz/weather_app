@@ -14,7 +14,7 @@ class WeatherController extends GetxController {
     _currentWeatherModel.value = value;
   }
 
-  Future<CurrentWeatherModel?> getCurrentWeather({required String cityName}) async {
+  Future<CurrentWeatherModel?> updateCurrentWeather({required String cityName}) async {
     CurrentWeatherModel? result = await weatherService.getCurrentWeather(cityName: cityName);
     if (result != null) {
       currentWeatherModel = result;

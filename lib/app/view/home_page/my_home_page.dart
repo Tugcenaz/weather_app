@@ -5,18 +5,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/app/components/weather_icon_widget.dart';
 import 'package:weather_app/app/components/wind_and_hum_widget.dart';
+import 'package:weather_app/app/controller/search_controller.dart';
 import 'package:weather_app/app/controller/weather_controller.dart';
 import 'package:weather_app/core/constants/icon_constants.dart';
 import 'package:weather_app/core/styles/text_styles.dart';
 import 'package:weather_app/core/time_convert.dart';
 import '../../components/page_background_widget.dart';
+import '../search_page.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
   WeatherController weatherController = Get.find();
+  CitySearchController citySearchController = Get.find();
 
   currentWeather() async {
-    await weatherController.getCurrentWeather(cityName: 'Bursa');
+    await weatherController.updateCurrentWeather(cityName:citySearchController.currentCity);
     return true;
   }
 
@@ -37,8 +40,8 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Container currentWeatherWidget() {
-    return Container(
+  Widget currentWeatherWidget() {
+    return Obx(()=>Container(
       height: 335.sp,
       width: 353.sp,
       decoration: BoxDecoration(
@@ -89,15 +92,15 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),);
   }
 
   Widget locationWidget() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 70.0.sp, horizontal: 30.sp),
       child: Bounceable(
-        onTap: () {
-          // Get.to(() => SearchPage());
+        onTap: () async {
+          await Get.to(() => SearchPage());
         },
         child: Row(
           children: [
@@ -111,10 +114,10 @@ class MyHomePage extends StatelessWidget {
             SizedBox(
               width: 20.sp,
             ),
-            Text(
-              'Surabaya',
+            Obx(() => Text(
+              citySearchController.currentCity,
               style: TextStyles.generalWhiteTextStyle1(),
-            ),
+            ),),
             SizedBox(
               width: 20.sp,
             ),
