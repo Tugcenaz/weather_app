@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:simple_animations/animation_builder/mirror_animation_builder.dart';
+import 'package:weather_app/app/components/my_custom_button.dart';
 import 'package:weather_app/app/view/search_page.dart';
 import 'package:weather_app/app/components/weather_icon_widget.dart';
 import 'package:weather_app/app/components/wind_and_hum_widget.dart';
@@ -26,26 +27,28 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return Column(
-      children: [
-        locationWidget(),
-        Obx(
-          () => MirrorAnimationBuilder(
-            builder: (BuildContext context, value, Widget? child) {
-              return Transform.scale(scale: value.toDouble(), child: child);
-            },
-            tween: Tween(begin: 1, end: 0.8),
-            duration: const Duration(seconds: 4),
-            child: weatherIconWidget(
-                imageUrl:
-                    'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),
+    return Padding(
+      padding:  EdgeInsets.symmetric(horizontal: 24.0.sp,vertical: 16.sp),
+      child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          locationWidget(),
+          Obx(
+            () => MirrorAnimationBuilder(
+              builder: (BuildContext context, value, Widget? child) {
+                return Transform.scale(scale: value.toDouble(), child: child);
+              },
+              tween: Tween(begin: 1, end: 0.8),
+              duration: const Duration(seconds: 4),
+              child: weatherIconWidget(
+                  imageUrl:
+                      'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),
+            ),
           ),
-        ),
-        SizedBox(
-          height: 100.h,
-        ),
-        currentWeatherWidget(),
-      ],
+
+          currentWeatherWidget(),
+          MyCustomButton(title: 'Hava durumu tahmin raporu'),
+        ],
+      ),
     );
   }
 
@@ -110,51 +113,48 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget locationWidget() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 70.0.sp, horizontal: 30.sp),
-      child: Bounceable(
-        onTap: () {
-          showModalBottomSheet(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0.sp),
-              ),
-              isScrollControlled: true,
-              useSafeArea: true,
-              context: Get.context!,
-              builder: (BuildContext context) {
-                return SearchPage();
-              });
-        },
-        child: Row(
-          children: [
-            SizedBox(
-              width: 24.sp,
-              height: 24.sp,
-              child: SvgPicture.asset(
-                IconConstants.map_icon,
-              ),
+    return Bounceable(
+      onTap: () {
+        showModalBottomSheet(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0.sp),
             ),
-            SizedBox(
-              width: 20.sp,
+            isScrollControlled: true,
+            useSafeArea: true,
+            context: Get.context!,
+            builder: (BuildContext context) {
+              return SearchPage();
+            });
+      },
+      child: Row(
+        children: [
+          SizedBox(
+            width: 24.sp,
+            height: 24.sp,
+            child: SvgPicture.asset(
+              IconConstants.map_icon,
             ),
-            Obx(
-              () => Text(
-                citySearchController.currentCity,
-                style: TextStyles.generalWhiteTextStyle1(),
-              ),
+          ),
+          SizedBox(
+            width: 20.sp,
+          ),
+          Obx(
+            () => Text(
+              citySearchController.currentCity,
+              style: TextStyles.generalWhiteTextStyle1(),
             ),
-            SizedBox(
-              width: 20.sp,
+          ),
+          SizedBox(
+            width: 20.sp,
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 4.0.sp),
+            child: SvgPicture.asset(
+              IconConstants.opt_icon,
+              width: 26.sp,
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 4.0.sp),
-              child: SvgPicture.asset(
-                IconConstants.opt_icon,
-                width: 26.sp,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
