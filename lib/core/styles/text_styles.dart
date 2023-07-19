@@ -6,7 +6,7 @@ class TextStyles {
   static TextStyle generalWhiteTextStyle1(
       {Color? color, FontWeight? fontWeight, double? fontSize}) {
     return GoogleFonts.overpass(
-        shadows: [const Shadow(blurRadius: 8, offset: Offset(1, 10))],
+        shadows: [const Shadow(blurRadius: 20, offset: Offset(1, 5))],
         fontSize: fontSize ?? 24.sp,
         color: color ?? Colors.white,
         fontWeight: fontWeight ?? FontWeight.w700,
