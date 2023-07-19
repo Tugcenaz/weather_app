@@ -43,11 +43,6 @@ class SearchPage extends StatelessWidget {
               hintText: 'Şehir ara',
               prefixIcon: const Icon(Icons.search),
 
-              //fillColor: Colors.white,
-              //filled: true,
-              /*border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.sp),
-                    borderSide: BorderSide.none)*/
             ),
           ),
         ),
