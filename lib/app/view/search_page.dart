@@ -9,7 +9,6 @@ class SearchPage extends StatelessWidget {
   SearchPage({super.key});
 
   WeatherController weatherController = Get.find();
-
   final CitySearchController citySearchController = Get.find();
   String searchKey = "";
 
@@ -42,7 +41,6 @@ class SearchPage extends StatelessWidget {
               ),
               hintText: 'Şehir ara',
               prefixIcon: const Icon(Icons.search),
-
             ),
           ),
         ),
@@ -55,10 +53,10 @@ class SearchPage extends StatelessWidget {
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50.0.sp),
                     child: ListTile(
-                      onTap: () async{
+                      onTap: () async {
                         citySearchController.currentCity =
                             citySearchController.cityList[index].name ?? "";
-                       await weatherController.updateCurrentWeather(
+                        await weatherController.updateCurrentWeather(
                             cityName: citySearchController.currentCity);
                         citySearchController.cityList.clear();
                         Get.back();
@@ -67,7 +65,6 @@ class SearchPage extends StatelessWidget {
                           Text(citySearchController.cityList[index].name ?? ''),
                       subtitle: Text(
                           citySearchController.cityList[index].country ?? ''),
-
                     ),
                   );
                 }),
