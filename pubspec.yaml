@@ -45,6 +45,7 @@ dependencies:
   cached_network_image: ^3.2.3
   intl: ^0.18.1
   simple_animations: ^5.0.2
+  get_storage: ^2.1.1
 
 
 
