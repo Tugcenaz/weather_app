@@ -37,8 +37,8 @@ class MyHomePage extends StatelessWidget {
               builder: (BuildContext context, value, Widget? child) {
                 return Transform.scale(scale: value.toDouble(), child: child);
               },
-              tween: Tween(begin: 1, end: 0.8),
-              duration: const Duration(seconds: 4),
+              tween: Tween(begin: 1.2, end: 0.8),
+              duration: const Duration(milliseconds: 1500),
               child: weatherIconWidget(
                   imageUrl:
                       'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),

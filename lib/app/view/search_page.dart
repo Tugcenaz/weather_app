@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:weather_app/core/constants/app_constants.dart';
 
 import '../controller/search_controller.dart';
 import '../controller/weather_controller.dart';
@@ -10,6 +12,7 @@ class SearchPage extends StatelessWidget {
 
   WeatherController weatherController = Get.find();
   final CitySearchController citySearchController = Get.find();
+
   String searchKey = "";
 
   search() async {
@@ -58,6 +61,8 @@ class SearchPage extends StatelessWidget {
                             citySearchController.cityList[index].name ?? "";
                         await weatherController.updateCurrentWeather(
                             cityName: citySearchController.currentCity);
+                        final box=GetStorage();
+                        box.write(AppConstants.selectedCityKey, citySearchController.currentCity);
                         citySearchController.cityList.clear();
                         Get.back();
                       },
