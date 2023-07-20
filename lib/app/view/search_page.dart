@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:weather_app/core/constants/app_constants.dart';
 
-import '../controller/search_controller.dart';
+import '../controller/city_search_controller.dart';
 import '../controller/weather_controller.dart';
 
 class SearchPage extends StatelessWidget {
@@ -26,7 +26,7 @@ class SearchPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.sp),
+          padding: EdgeInsets.symmetric(vertical: 40.sp),
           child: TextFormField(
             showCursor: true,
             onEditingComplete: () {
