@@ -32,6 +32,6 @@ class TextStyles {
         color: color ?? Colors.white,
         fontWeight: fontWeight ?? FontWeight.w400,
         height: 1.3,
-        letterSpacing: 1);
+        letterSpacing: 1.1);
   }
 }
