@@ -5,10 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:simple_animations/animation_builder/mirror_animation_builder.dart';
 import 'package:weather_app/app/components/my_custom_button.dart';
+import 'package:weather_app/app/view/forecast_report_page/forecast_report_page.dart';
 import 'package:weather_app/app/view/search_page.dart';
 import 'package:weather_app/app/components/weather_icon_widget.dart';
 import 'package:weather_app/app/components/wind_and_hum_widget.dart';
-import 'package:weather_app/app/controller/search_controller.dart';
+import 'package:weather_app/app/controller/city_search_controller.dart';
 import 'package:weather_app/app/controller/weather_controller.dart';
 import 'package:weather_app/core/constants/icon_constants.dart';
 import 'package:weather_app/core/styles/text_styles.dart';
@@ -28,8 +29,9 @@ class MyHomePage extends StatelessWidget {
 
   Widget _buildBody() {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 24.0.sp,vertical: 16.sp),
-      child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      padding: EdgeInsets.symmetric(horizontal: 24.0.sp, vertical: 16.sp),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           locationWidget(),
           Obx(
@@ -40,13 +42,19 @@ class MyHomePage extends StatelessWidget {
               tween: Tween(begin: 1.2, end: 0.8),
               duration: const Duration(milliseconds: 1500),
               child: weatherIconWidget(
+                  height: 200,
+                  width: 200,
                   imageUrl:
                       'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),
             ),
           ),
-
           currentWeatherWidget(),
-          MyCustomButton(title: 'Hava durumu tahmin raporu'),
+          MyCustomButton(
+            title: 'Tahmin Raporu',
+            onTap: () => Get.to(
+              () => ForecastReportPage(),
+            ),
+          ),
         ],
       ),
     );
@@ -162,6 +170,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           pageBackGroundWidget(),
