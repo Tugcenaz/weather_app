@@ -6,14 +6,15 @@ import '../../core/styles/text_styles.dart';
 
 class MyCustomButton extends StatelessWidget {
   String title;
+  VoidCallback onTap;
 
-  MyCustomButton({super.key, required this.title});
+  MyCustomButton({super.key, required this.title,required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Bounceable(
-      onTap: () {
-        debugPrint('Tahmin sayfası açılacak...');
+      onTap: (){
+        onTap();
       },
       child: Container(
         width: 220.sp,
@@ -23,9 +24,9 @@ class MyCustomButton extends StatelessWidget {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                  blurRadius: 20.sp,
+                  blurRadius: 30.sp,
                   offset: Offset(-4.sp, 0.sp),
-                  color: Colors.black.withOpacity(0.5))
+                  color: Colors.black.withOpacity(0.2))
             ]),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -33,13 +34,14 @@ class MyCustomButton extends StatelessWidget {
             Text(
               title,
               style: TextStyles.generalWhiteTextStyle3(
-                fontSize: 13.sp,
+                fontSize: 16.sp,
                 color: const Color(0xff444E72),
               ),
             ),
+            SizedBox(width: 10.w,),
             Icon(
               Icons.arrow_forward_ios_rounded,
-              size: 12.sp,
+              size: 14.sp,
               color: const Color(0xff444E72),
             ),
           ],
