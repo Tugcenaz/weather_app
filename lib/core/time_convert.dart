@@ -61,7 +61,7 @@ String dateToStringTimeWithoutYear(int dateMilliSecond) {
 }
 
 String timeToString(String formattedString) {
-  var format = DateFormat('Hm');
+  var format = DateFormat('j');
   var timeString =
   format.format(DateTime.parse(formattedString));
   return timeString;
