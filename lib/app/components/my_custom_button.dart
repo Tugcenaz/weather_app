@@ -8,26 +8,21 @@ class MyCustomButton extends StatelessWidget {
   String title;
   VoidCallback onTap;
 
-  MyCustomButton({super.key, required this.title,required this.onTap});
+  MyCustomButton({super.key, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Bounceable(
-      onTap: (){
+      onTap: () {
         onTap();
       },
       child: Container(
         width: 220.sp,
         height: 64.sp,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(22.sp),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: 30.sp,
-                  offset: Offset(-4.sp, 0.sp),
-                  color: Colors.black.withOpacity(0.2))
-            ]),
+          borderRadius: BorderRadius.circular(22.sp),
+          color: Colors.white,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -38,7 +33,9 @@ class MyCustomButton extends StatelessWidget {
                 color: const Color(0xff444E72),
               ),
             ),
-            SizedBox(width: 10.w,),
+            SizedBox(
+              width: 10.w,
+            ),
             Icon(
               Icons.arrow_forward_ios_rounded,
               size: 14.sp,
