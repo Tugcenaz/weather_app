@@ -78,29 +78,32 @@ class ForecastReportPage extends StatelessWidget {
               ?.forecastday?[forecastWeatherController.selectedDayIndex.value]
               .hour?[index];
           if (hourWeather != null) {
-            return Column(
-              children: [
-                Text(
-                  '${(hourWeather.tempC ?? 0).toStringAsFixed(1)}°C',
-                  style: TextStyles.generalWhiteTextStyle3(
-                      fontWeight: FontWeight.w700, fontSize: 18.sp),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                weatherIconWidget(
-                    imageUrl: 'https:${hourWeather.condition?.icon}',
-                    width: 70,
-                    height: 70),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  timeToString(hourWeather.time!),
-                  style: TextStyles.generalWhiteTextStyle3(
-                      fontWeight: FontWeight.w600, fontSize: 18.sp),
-                ),
-              ],
+            return Padding(
+              padding: EdgeInsets.only(left: 12.0.w, right: 12.w),
+              child: Column(
+                children: [
+                  Text(
+                    '${(hourWeather.tempC ?? 0).toStringAsFixed(1)}°C',
+                    style: TextStyles.generalWhiteTextStyle3(
+                        fontWeight: FontWeight.w700, fontSize: 18.sp),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  weatherIconWidget(
+                      imageUrl: 'https:${hourWeather.condition?.icon}',
+                      width: 70,
+                      height: 70),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    timeToString(hourWeather.time!),
+                    style: TextStyles.generalWhiteTextStyle3(
+                        fontWeight: FontWeight.w600, fontSize: 18.sp),
+                  ),
+                ],
+              ),
             );
           } else {
             return Container();

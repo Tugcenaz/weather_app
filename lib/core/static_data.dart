@@ -1,1 +1,2 @@
- const int WEATHER_FORECAST_DAY=7;
+
+const int WEATHER_FORECAST_DAY=7;

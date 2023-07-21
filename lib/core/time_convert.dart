@@ -1,11 +1,11 @@
 import 'package:intl/intl.dart';
 
 String dateToStringTime(int dateMilliSecond) {
-  var format = DateFormat('dd, MM');
+  var format = DateFormat('d/M');
   var dateString =
       format.format(DateTime.fromMillisecondsSinceEpoch(dateMilliSecond));
-  return dateString;
 
+  return dateString;
 }
 
 String dateToStringTimeWithoutYear(int dateMilliSecond) {
@@ -55,14 +55,12 @@ String dateToStringTimeWithoutYear(int dateMilliSecond) {
   var format = DateFormat('dd');
   var dayString =
       format.format(DateTime.fromMillisecondsSinceEpoch(dateMilliSecond));
-  Map<String,dynamic> dayAndMonth= {'month': monthString, 'day': dayString};
+  Map<String, dynamic> dayAndMonth = {'month': monthString, 'day': dayString};
   return '${dayAndMonth['day']}  ${dayAndMonth['month']}';
-
 }
 
 String timeToString(String formattedString) {
   var format = DateFormat('j');
-  var timeString =
-  format.format(DateTime.parse(formattedString));
+  var timeString = format.format(DateTime.parse(formattedString));
   return timeString;
 }
