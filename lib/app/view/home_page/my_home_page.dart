@@ -60,12 +60,15 @@ class MyHomePage extends StatelessWidget {
           MyCustomButton(
               title: 'Tahmin Raporu',
               onTap: () async {
-                await forecastWeatherController.getForecastWeather(
+                var data = await forecastWeatherController.getForecastWeather(
                     cityName: citySearchController.currentCity);
-                debugPrint('get.to çalıştı ');
-                Get.to(
-                  () => ForecastReportPage(),
-                );
+                if (data != null) {
+                  Get.to(
+                    () => ForecastReportPage(),
+                  );
+                } else {
+                  Get.snackbar('Hata', 'Sistem Hatası');
+                }
               }),
         ],
       ),
