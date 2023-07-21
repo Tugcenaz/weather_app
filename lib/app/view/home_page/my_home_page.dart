@@ -5,10 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:simple_animations/animation_builder/mirror_animation_builder.dart';
 import 'package:weather_app/app/components/my_custom_button.dart';
+import 'package:weather_app/app/controller/forecast_weather_controller.dart';
 import 'package:weather_app/app/view/forecast_report_page/forecast_report_page.dart';
 import 'package:weather_app/app/view/search_page.dart';
 import 'package:weather_app/app/components/weather_icon_widget.dart';
-import 'package:weather_app/app/components/wind_and_hum_widget.dart';
+import 'package:weather_app/app/components/details_widget.dart';
 import 'package:weather_app/app/controller/city_search_controller.dart';
 import 'package:weather_app/app/controller/weather_controller.dart';
 import 'package:weather_app/core/constants/icon_constants.dart';
@@ -20,6 +21,7 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
   WeatherController weatherController = Get.find();
   CitySearchController citySearchController = Get.find();
+  ForecastWeatherController forecastWeatherController = Get.find();
 
   currentWeather() async {
     await weatherController.updateCurrentWeather(
@@ -29,7 +31,7 @@ class MyHomePage extends StatelessWidget {
 
   Widget _buildBody() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.0.sp, vertical: 16.sp),
+      padding: EdgeInsets.symmetric(horizontal: 24.0.sp, vertical: 50.sp),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -48,13 +50,23 @@ class MyHomePage extends StatelessWidget {
                       'https:${weatherController.currentWeatherModel.current?.condition?.icon}'),
             ),
           ),
-          currentWeatherWidget(),
-          MyCustomButton(
-            title: 'Tahmin Raporu',
-            onTap: () => Get.to(
-              () => ForecastReportPage(),
+          Obx(
+            () => Text(
+              'Hissedilen sıcaklık :  ${weatherController.currentWeatherModel.current?.feelslikeC}°',
+              style: TextStyles.generalWhiteTextStyle3(),
             ),
           ),
+          currentWeatherWidget(),
+          MyCustomButton(
+              title: 'Tahmin Raporu',
+              onTap: () async {
+                await forecastWeatherController.getForecastWeather(
+                    cityName: citySearchController.currentCity);
+                debugPrint('get.to çalıştı ');
+                Get.to(
+                  () => ForecastReportPage(),
+                );
+              }),
         ],
       ),
     );
@@ -97,17 +109,17 @@ class MyHomePage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 10.sp,
+                height: 20.sp,
               ),
-              WindAndHumWidget(
+              detailsWidget(
                   icon: IconConstants.windy_icon,
                   title: 'Rüzgar',
                   weatherState:
                       weatherController.currentWeatherModel.current?.windKph),
               SizedBox(
-                height: 10.sp,
+                height: 20.sp,
               ),
-              WindAndHumWidget(
+              detailsWidget(
                   icon: IconConstants.hum_icon,
                   title: 'Nem',
                   weatherState: weatherController

@@ -21,6 +21,9 @@ class ForecastReportPage extends StatelessWidget {
     return Bounceable(
       onTap: () {
         Get.back();
+        forecastWeatherController.selectedDayIndex.value = 0;
+        debugPrint('get.back çalıştı ');
+
       },
       child: Row(
         children: [
@@ -112,31 +115,36 @@ class ForecastReportPage extends StatelessWidget {
 
   Widget forecastOfTheNextDays() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.symmetric(horizontal: 8.0.sp),
       child: Obx(() => ListView.builder(
           itemCount: forecastWeatherController
               .forecastWeather.forecast?.forecastday?.length,
           itemBuilder: (_, int index) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  dateToStringTime((forecastWeatherController.forecastWeather
-                              .forecast?.forecastday?[index].dateEpoch ??
-                          0) *
-                      1000),
-                  style: TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
-                ),
-                weatherIconWidget(
-                    imageUrl:
-                        'https:${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.condition?.icon ?? ''}',
-                    width: 60,
-                    height: 60),
-                Text(
-                  '${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.avgtempC ?? 0}°',
-                  style: TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
-                ),
-              ],
+            return Bounceable(
+              onTap: () {
+                forecastWeatherController.selectedDayIndex.value = index;
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    dateToStringTime((forecastWeatherController.forecastWeather
+                                .forecast?.forecastday?[index].dateEpoch ??
+                            0) *
+                        1000),
+                    style: TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
+                  ),
+                  weatherIconWidget(
+                      imageUrl:
+                          'https:${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.condition?.icon ?? ''}',
+                      width: 60,
+                      height: 60),
+                  Text(
+                    '${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.avgtempC?.toStringAsFixed(0) ?? 0}° / ${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.mintempC?.toStringAsFixed(0) ?? 0}°',
+                    style: TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
+                  ),
+                ],
+              ),
             );
           })),
     );
@@ -153,9 +161,12 @@ class ForecastReportPage extends StatelessWidget {
           ),
           rowDateTimeAndCity(),
           SizedBox(
-            height: 20.sp,
+            height: 40.sp,
           ),
           Expanded(child: todayWeatherListviewBuilder()),
+          SizedBox(
+            height: 20.sp,
+          ),
           Text(
             'Tahminler',
             style: TextStyles.generalWhiteTextStyle1(),
@@ -171,7 +182,6 @@ class ForecastReportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
