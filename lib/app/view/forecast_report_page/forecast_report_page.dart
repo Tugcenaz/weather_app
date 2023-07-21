@@ -17,11 +17,6 @@ class ForecastReportPage extends StatelessWidget {
   WeatherController weatherController = Get.find();
   ForecastWeatherController forecastWeatherController = Get.find();
 
-  getForecastWeather() async {
-    await forecastWeatherController.getForecastWeather(
-        cityName: citySearchController.currentCity);
-  }
-
   Widget rowAppBarWidget() {
     return Bounceable(
       onTap: () {
@@ -127,18 +122,18 @@ class ForecastReportPage extends StatelessWidget {
               children: [
                 Text(
                   dateToStringTime((forecastWeatherController.forecastWeather
-                              .forecast!.forecastday?[index].dateEpoch ??
+                              .forecast?.forecastday?[index].dateEpoch ??
                           0) *
                       1000),
                   style: TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
                 ),
                 weatherIconWidget(
                     imageUrl:
-                        'https:${forecastWeatherController.forecastWeather.forecast!.forecastday?[index].day?.condition?.icon ?? ''}',
+                        'https:${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.condition?.icon ?? ''}',
                     width: 60,
                     height: 60),
                 Text(
-                  '${forecastWeatherController.forecastWeather.forecast!.forecastday?[index].day?.avgtempC ?? 0}°',
+                  '${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.avgtempC ?? 0}°',
                   style: TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
                 ),
               ],
@@ -148,7 +143,6 @@ class ForecastReportPage extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    getForecastWeather();
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 70.0.sp, horizontal: 20.sp),
       child: Column(
@@ -177,6 +171,7 @@ class ForecastReportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
