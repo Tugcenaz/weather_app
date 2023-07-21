@@ -46,6 +46,18 @@ dependencies:
   intl: ^0.18.1
   simple_animations: ^5.0.2
   get_storage: ^2.1.1
+  flutter_launcher_icons: ^0.13.1
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/weather.png"
+  min_sdk_android: 21
+
+
+
+
 
 
 
