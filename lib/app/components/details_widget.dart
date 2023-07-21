@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../core/styles/text_styles.dart';
 
-class WindAndHumWidget extends StatelessWidget {
+class detailsWidget extends StatelessWidget {
   final String icon;
   final String title;
   final double? weatherState;
 
-  const WindAndHumWidget(
+  const detailsWidget(
       {super.key,
       required this.icon,
       required this.title,
