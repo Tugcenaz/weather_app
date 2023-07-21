@@ -58,7 +58,7 @@ class MyHomePage extends StatelessWidget {
           ),
           currentWeatherWidget(),
           MyCustomButton(
-              title: 'Tahmin Raporu',
+              title: 'Haftalık Tahmin',
               onTap: () async {
                 var data = await forecastWeatherController.getForecastWeather(
                     cityName: citySearchController.currentCity);
