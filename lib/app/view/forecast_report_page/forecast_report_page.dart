@@ -22,8 +22,6 @@ class ForecastReportPage extends StatelessWidget {
       onTap: () {
         Get.back();
         forecastWeatherController.selectedDayIndex.value = 0;
-        debugPrint('get.back çalıştı ');
-
       },
       child: Row(
         children: [
@@ -80,32 +78,29 @@ class ForecastReportPage extends StatelessWidget {
               ?.forecastday?[forecastWeatherController.selectedDayIndex.value]
               .hour?[index];
           if (hourWeather != null) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-              child: Column(
-                children: [
-                  Text(
-                    '${(hourWeather.tempC ?? 0).toStringAsFixed(1)}°C',
-                    style: TextStyles.generalWhiteTextStyle3(
-                        fontWeight: FontWeight.w700, fontSize: 18.sp),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  weatherIconWidget(
-                      imageUrl: 'https:${hourWeather.condition?.icon}',
-                      width: 70,
-                      height: 70),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    timeToString(hourWeather.time!),
-                    style: TextStyles.generalWhiteTextStyle3(
-                        fontWeight: FontWeight.w600, fontSize: 18.sp),
-                  ),
-                ],
-              ),
+            return Column(
+              children: [
+                Text(
+                  '${(hourWeather.tempC ?? 0).toStringAsFixed(1)}°C',
+                  style: TextStyles.generalWhiteTextStyle3(
+                      fontWeight: FontWeight.w700, fontSize: 18.sp),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                weatherIconWidget(
+                    imageUrl: 'https:${hourWeather.condition?.icon}',
+                    width: 70,
+                    height: 70),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(
+                  timeToString(hourWeather.time!),
+                  style: TextStyles.generalWhiteTextStyle3(
+                      fontWeight: FontWeight.w600, fontSize: 18.sp),
+                ),
+              ],
             );
           } else {
             return Container();
@@ -124,26 +119,43 @@ class ForecastReportPage extends StatelessWidget {
               onTap: () {
                 forecastWeatherController.selectedDayIndex.value = index;
               },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    dateToStringTime((forecastWeatherController.forecastWeather
-                                .forecast?.forecastday?[index].dateEpoch ??
-                            0) *
-                        1000),
-                    style: TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
+              child: Obx(
+                () => Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10.sp),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(22.sp),
+                    color: forecastWeatherController.selectedDayIndex.value ==
+                            index
+                        ? Colors.blue.shade200
+                        : const Color(0),
                   ),
-                  weatherIconWidget(
-                      imageUrl:
-                          'https:${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.condition?.icon ?? ''}',
-                      width: 60,
-                      height: 60),
-                  Text(
-                    '${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.avgtempC?.toStringAsFixed(0) ?? 0}° / ${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.mintempC?.toStringAsFixed(0) ?? 0}°',
-                    style: TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        dateToStringTime((forecastWeatherController
+                                    .forecastWeather
+                                    .forecast
+                                    ?.forecastday?[index]
+                                    .dateEpoch ??
+                                0) *
+                            1000),
+                        style:
+                            TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
+                      ),
+                      weatherIconWidget(
+                          imageUrl:
+                              'https:${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.condition?.icon ?? ''}',
+                          width: 60,
+                          height: 60),
+                      Text(
+                        '${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.avgtempC?.toStringAsFixed(0) ?? 0}° / ${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.mintempC?.toStringAsFixed(0) ?? 0}°',
+                        style:
+                            TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             );
           })),
