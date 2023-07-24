@@ -1,10 +1,33 @@
 import 'package:intl/intl.dart';
 
 String dateToStringTime(int dateMilliSecond) {
-  var format = DateFormat('d/M');
+  var format = DateFormat('EEE'); //"d/M"
   var dateString =
       format.format(DateTime.fromMillisecondsSinceEpoch(dateMilliSecond));
 
+  switch (dateString) {
+    case 'Mon':
+      dateString = 'Pzt';
+      break;
+    case 'Tue':
+      dateString = 'Sal';
+      break;
+    case 'Wed':
+      dateString = 'Çar';
+      break;
+    case 'Thu':
+      dateString = 'Per';
+      break;
+    case 'Fri':
+      dateString = 'Cum';
+      break;
+    case 'Sat':
+      dateString = 'Cmt';
+      break;
+    case 'Sun':
+      dateString = 'Paz';
+      break;
+  }
   return dateString;
 }
 

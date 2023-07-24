@@ -152,7 +152,7 @@ class ForecastReportPage extends StatelessWidget {
                           width: 60,
                           height: 60),
                       Text(
-                        '${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.avgtempC?.toStringAsFixed(0) ?? 0}° / ${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.mintempC?.toStringAsFixed(0) ?? 0}°',
+                        '${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.maxtempC?.toStringAsFixed(0) ?? 0}° / ${forecastWeatherController.forecastWeather.forecast?.forecastday?[index].day?.mintempC?.toStringAsFixed(0) ?? 0}°',
                         style:
                             TextStyles.generalWhiteTextStyle3(fontSize: 18.sp),
                       ),
