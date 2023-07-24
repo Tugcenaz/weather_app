@@ -1,8 +1,7 @@
 class IconConstants {
-  static const map_icon = 'assets/icons/map.svg';
-  static const opt_icon = 'assets/icons/opt.svg';
-  static const windy_icon = 'assets/icons/windy.svg';
-  static const hum_icon = 'assets/icons/hum.svg';
-  static const weather_logo= 'assets/icons/weather.png';
-
+  static const mapIcon = 'assets/icons/map.svg';
+  static const optIcon = 'assets/icons/opt.svg';
+  static const windyIcon = 'assets/icons/windy.svg';
+  static const humIcon = 'assets/icons/hum.svg';
+  static const weatherLogo = 'assets/icons/weather.png';
 }

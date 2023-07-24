@@ -114,16 +114,16 @@ class MyHomePage extends StatelessWidget {
               SizedBox(
                 height: 20.sp,
               ),
-              detailsWidget(
-                  icon: IconConstants.windy_icon,
+              DetailsWidget(
+                  icon: IconConstants.windyIcon,
                   title: 'Rüzgar',
                   weatherState:
                       weatherController.currentWeatherModel.current?.windKph),
               SizedBox(
                 height: 20.sp,
               ),
-              detailsWidget(
-                  icon: IconConstants.hum_icon,
+              DetailsWidget(
+                  icon: IconConstants.humIcon,
                   title: 'Nem',
                   weatherState: weatherController
                       .currentWeatherModel.current?.humidity
@@ -155,7 +155,7 @@ class MyHomePage extends StatelessWidget {
             width: 24.sp,
             height: 24.sp,
             child: SvgPicture.asset(
-              IconConstants.map_icon,
+              IconConstants.mapIcon,
             ),
           ),
           SizedBox(
@@ -173,7 +173,7 @@ class MyHomePage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 4.0.sp),
             child: SvgPicture.asset(
-              IconConstants.opt_icon,
+              IconConstants.optIcon,
               width: 26.sp,
             ),
           ),
