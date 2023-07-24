@@ -91,7 +91,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.symmetric(vertical: 24.0.sp),
           child: Column(
             children: [
               Text(

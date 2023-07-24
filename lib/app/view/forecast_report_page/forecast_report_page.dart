@@ -167,7 +167,7 @@ class ForecastReportPage extends StatelessWidget {
 
   Widget _buildBody() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 70.0.sp, horizontal: 20.sp),
+      padding: EdgeInsets.symmetric(vertical: 80.0.sp, horizontal: 20.sp),
       child: Column(
         children: [
           rowAppBarWidget(),
