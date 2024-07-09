@@ -16,32 +16,23 @@ class DetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Table(
       children: [
-        SvgPicture.asset(
-          icon,
-          width: 28.sp,
-        ),
-        SizedBox(
-          width: 10.sp,
-        ),
-        Text(
-          title,
-          style: TextStyles.generalWhiteTextStyle3(),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 18.0.sp),
-          child: Text(
-            '|',
-            style: TextStyles.generalWhiteTextStyle3(),
+        TableRow(children: [
+          SvgPicture.asset(
+            icon,
+            width: 28.sp,
           ),
-        ),
-        if (weatherState != null)
           Text(
-            '${weatherState?.toStringAsFixed(0)} km/h',
+            title,
             style: TextStyles.generalWhiteTextStyle3(),
           ),
+          if (weatherState != null)
+            Text(
+              '${weatherState?.toStringAsFixed(0)} km/h',
+              style: TextStyles.generalWhiteTextStyle3(),
+            ),
+        ])
       ],
     );
   }

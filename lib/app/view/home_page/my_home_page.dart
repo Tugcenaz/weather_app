@@ -59,16 +59,13 @@ class MyHomePage extends StatelessWidget {
           currentWeatherWidget(),
           MyCustomButton(
               title: 'Haftalık Tahmin',
-              onTap: () async {
-                var data = await forecastWeatherController.getForecastWeather(
-                    cityName: citySearchController.currentCity);
-                if (data != null) {
+              onTap: ()  {
+
+
                   Get.to(
                     () => ForecastReportPage(),
                   );
-                } else {
-                  Get.snackbar('Hata', 'Sistem Hatası');
-                }
+
               }),
         ],
       ),
@@ -78,7 +75,7 @@ class MyHomePage extends StatelessWidget {
   Widget currentWeatherWidget() {
     return Obx(
       () => Container(
-        height: 335.sp,
+
         width: 353.sp,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white.withOpacity(0.7), width: 2.sp),

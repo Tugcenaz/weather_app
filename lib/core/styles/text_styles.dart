@@ -5,11 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 class TextStyles {
   static TextStyle generalWhiteTextStyle1(
       {Color? color, FontWeight? fontWeight, double? fontSize}) {
-    return GoogleFonts.overpass(
+    return TextStyle(
 
-        fontSize: fontSize ?? 24.sp,
+        fontSize: fontSize ?? 20.sp,
         color: color ?? Colors.white,
-        fontWeight: fontWeight ?? FontWeight.w700,
+        fontWeight: fontWeight ?? FontWeight.w500,
         height: 1.3,
         letterSpacing: 1.1);
   }
@@ -27,8 +27,8 @@ class TextStyles {
 
   static TextStyle generalWhiteTextStyle3(
       {Color? color, FontWeight? fontWeight, double? fontSize}) {
-    return GoogleFonts.overpass(
-        fontSize: fontSize ?? 20.sp,
+    return TextStyle(
+        fontSize: fontSize ?? 18.sp,
         color: color ?? Colors.white,
         fontWeight: fontWeight ?? FontWeight.w400,
         height: 1.3,

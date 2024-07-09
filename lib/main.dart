@@ -9,7 +9,6 @@ import 'app/view/home_page/my_home_page.dart';
 
 void main() async {
   InitialBindings().dependencies();
-
   await dotenv.load(fileName: ".env");
   await GetStorage.init();
   runApp(const MyApp());

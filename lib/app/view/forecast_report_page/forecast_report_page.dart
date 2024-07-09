@@ -11,11 +11,30 @@ import 'package:weather_app/core/time_convert.dart';
 import '../../components/page_background_widget.dart';
 import '../../models/forecast_weather_model.dart';
 
-class ForecastReportPage extends StatelessWidget {
+class ForecastReportPage extends StatefulWidget {
   ForecastReportPage({Key? key}) : super(key: key);
+
+  @override
+  State<ForecastReportPage> createState() => _ForecastReportPageState();
+}
+
+class _ForecastReportPageState extends State<ForecastReportPage> {
   CitySearchController citySearchController = Get.find();
+
   WeatherController weatherController = Get.find();
+
   ForecastWeatherController forecastWeatherController = Get.find();
+void getforecat()async{
+await forecastWeatherController.getForecastWeather(
+      cityName: citySearchController.currentCity);
+  debugPrint('current city ${citySearchController.currentCity}');
+}
+  @override
+  initState()  {
+    super.initState();
+
+   getforecat();
+  }
 
   Widget rowAppBarWidget() {
     return Bounceable(
